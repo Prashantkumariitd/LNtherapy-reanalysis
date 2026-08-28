@@ -1,0 +1,4 @@
+# Large Seurat objects - keep local for now
+06_scRNA_extension/seurat_qc_FINAL.rds
+06_scRNA_extension/seurat_norm_HVG_FINAL.rds
+06_scRNA_extension/SCRNA_CHECKPOINT_NORMALIZED_HVG.rds
