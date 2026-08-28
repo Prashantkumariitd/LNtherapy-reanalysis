@@ -1,0 +1,512 @@
+  sep = "\n"
+)
+for (d in names(DEG_results)) {
+  x <- DEG_results[[d]]
+  cat("\n================", d, "================\n")
+  cat("Genes:", nrow(x), "\n")
+  cat("P < 0.05:", sum(x$P.Value < 0.05, na.rm = TRUE), "\n")
+  cat("P < 0.01:", sum(x$P.Value < 0.01, na.rm = TRUE), "\n")
+  cat("P < 0.001:", sum(x$P.Value < 0.001, na.rm = TRUE), "\n")
+  cat("FDR < 0.05:", sum(x$adj.P.Val < 0.05, na.rm = TRUE), "\n")
+  cat("Bonf < 0.05:", sum(x$Bonf < 0.05, na.rm = TRUE), "\n")
+}
+utils_code <- readLines(
+  "C:/Users/kumar/Downloads/LNtherapy-main/LNtherapy-main/R/utils.R",
+  warn = FALSE
+)
+idx <- grep(
+  "limma\\.DEG[[:space:]]*<-",
+  utils_code
+)
+idx
+cat(
+  utils_code[
+    idx:min(length(utils_code), idx + 100)
+  ],
+  sep = "\n"
+)
+cat("DATA dimensions:\n")
+print(dim(data))
+cat("\nMetadata dimensions:\n")
+print(dim(metadata))
+cat("\nData/metadata matching:\n")
+print(all(colnames(data) %in% rownames(metadata)))
+print(all(rownames(metadata) %in% colnames(data)))
+cat("\nDrug groups:\n")
+print(table(metadata$Drug_group, useNA = "ifany"))
+cat("\nDiagnosis:\n")
+print(table(metadata$Diagnosis, useNA = "ifany"))
+cat("\nResponse:\n")
+print(table(metadata$Response, useNA = "ifany"))
+cat("DATA dimensions:\n")
+print(dim(data))
+cat("\nMetadata dimensions:\n")
+print(dim(metadata))
+cat("\nData/metadata matching:\n")
+print(all(colnames(data) %in% rownames(metadata)))
+print(all(rownames(metadata) %in% colnames(data)))
+cat("\nDrug groups:\n")
+print(table(metadata$Drug_group, useNA = "ifany"))
+cat("\nDiagnosis:\n")
+print(table(metadata$Diagnosis, useNA = "ifany"))
+cat("\nResponse:\n")
+print(table(metadata$Response, useNA = "ifany"))
+# ============================================================
+# RELOAD GSE224705 RECONSTRUCTED DATA
+# ============================================================
+gse_env <- new.env()
+load(
+  "C:/Users/kumar/OneDrive/Documents/GSE224705_Dataset_reconstructed.RData",
+  envir = gse_env
+)
+ls(gse_env)
+data <- gse_env$data
+metadata <- gse_env$metadata
+cat("DATA dimensions:\n")
+print(dim(data))
+cat("\nMETADATA dimensions:\n")
+print(dim(metadata))
+cat("\nDrug groups:\n")
+print(table(metadata$drug_group, useNA = "ifany"))
+cat("\nDiagnosis:\n")
+print(table(metadata$diagnosis, useNA = "ifany"))
+cat("\nResponse:\n")
+print(table(metadata$sri4_response, useNA = "ifany"))
+# ============================================================
+# INSPECT EXACT AUTHOR DEG CALLS
+# ============================================================
+deg_code <- readLines(
+  "C:/Users/kumar/Downloads/LNtherapy-main/LNtherapy-main/R/01_GetDEGs.R",
+  warn = FALSE
+)
+cat(deg_code, sep = "\n")
+# ============================================================
+# EXACT AUTHOR DEG REPRODUCTION
+# ============================================================
+author_DEGS <- list()
+# ------------------------------------------------------------
+# MMF
+# ------------------------------------------------------------
+met.tmp <- metadata[
+  metadata$drug_group == "MMF" &
+  metadata$diagnosis != "Healthy",
+  ,
+  drop = FALSE
+]
+dat.tmp <- data[, rownames(met.tmp), drop = FALSE]
+cat("\n================ MMF ================\n")
+cat("Samples:", nrow(met.tmp), "\n")
+print(table(met.tmp$sri4_response))
+res <- limma.DEG(
+  data = dat.tmp,
+  metadata = met.tmp,
+  covars = ~Sex + Act + MMF_or_AZA_dose + Prednisone_dose,
+  padj = "bonferroni"
+)
+author_DEGS$MMF <- res
+cat("DEGs:", sum(res$adj.P.Val <= 0.05, na.rm = TRUE), "\n")
+cat("UP:", sum(res$adj.P.Val <= 0.05 & res$logFC > 0, na.rm = TRUE), "\n")
+cat("DOWN:", sum(res$adj.P.Val <= 0.05 & res$logFC < 0, na.rm = TRUE), "\n")
+source(
+  "C:/Users/kumar/Downloads/LNtherapy-main/LNtherapy-main/R/utils.R"
+)
+exists("limma.DEG")
+metadata_author <- metadata
+metadata_author$Response <- metadata_author$sri4_response
+metadata_author$Drug_group <- metadata_author$drug_group
+metadata_author$Diagnosis <- metadata_author$diagnosis
+# Author's limma.DEG() expects Patient_ID too
+metadata_author$Patient_ID <- metadata_author$patient_id
+colnames(metadata_author)
+table(
+  metadata_author$Response,
+  useNA = "ifany"
+)
+table(
+  metadata_author$Drug_group,
+  useNA = "ifany"
+)
+met.tmp <- metadata_author[
+  metadata_author$Drug_group == "MMF" &
+  metadata_author$Diagnosis != "Healthy",
+  ,
+  drop = FALSE
+]
+dat.tmp <- data[, rownames(met.tmp), drop = FALSE]
+cat("\n================ MMF ================\n")
+cat("Samples:", nrow(met.tmp), "\n")
+print(table(met.tmp$Response))
+res_MMF <- limma.DEG(
+  data = dat.tmp,
+  metadata = met.tmp,
+  covars = ~Sex + Act + MMF_or_AZA_dosis + Prednisone_dosis,
+  padj = "bonferroni"
+)
+cat(
+  "DEGs:",
+  sum(res_MMF$adj.P.Val <= 0.05, na.rm = TRUE),
+  "\n"
+)
+cat(
+  "UP:",
+  sum(
+    res_MMF$adj.P.Val <= 0.05 &
+    res_MMF$logFC > 0,
+    na.rm = TRUE
+  ),
+  "\n"
+)
+cat(
+  "DOWN:",
+  sum(
+    res_MMF$adj.P.Val <= 0.05 &
+    res_MMF$logFC < 0,
+    na.rm = TRUE
+  ),
+  "\n"
+)
+exists("limma.DEG")
+# ============================================================
+# EXACT AUTHOR DEG REPRODUCTION
+# ============================================================
+author_DEGS <- list()
+# ------------------------------------------------------------
+# MMF
+# ------------------------------------------------------------
+met.tmp <- metadata[
+  metadata$drug_group == "MMF" &
+  metadata$diagnosis != "Healthy",
+  ,
+  drop = FALSE
+]
+dat.tmp <- data[, rownames(met.tmp), drop = FALSE]
+cat("\n================ MMF ================\n")
+cat("Samples:", nrow(met.tmp), "\n")
+print(table(met.tmp$sri4_response))
+res <- limma.DEG(
+  data = dat.tmp,
+  metadata = met.tmp,
+  covars = ~Sex + Act + MMF_or_AZA_dose + Prednisone_dose,
+  padj = "bonferroni"
+)
+author_DEGS$MMF <- res
+cat("DEGs:", sum(res$adj.P.Val <= 0.05, na.rm = TRUE), "\n")
+cat("UP:", sum(res$adj.P.Val <= 0.05 & res$logFC > 0, na.rm = TRUE), "\n")
+cat("DOWN:", sum(res$adj.P.Val <= 0.05 & res$logFC < 0, na.rm = TRUE), "\n")
+met.tmp <- metadata_author[
+  metadata_author$Drug_group == "MMF" &
+  metadata_author$Diagnosis != "Healthy",
+  ,
+  drop = FALSE
+]
+dat.tmp <- data[, rownames(met.tmp), drop = FALSE]
+res_MMF <- limma.DEG(
+  data = dat.tmp,
+  metadata = met.tmp,
+  covars = ~Sex + Act + MMF_or_AZA_dosis + Prednisone_dosis,
+  padj = "bonferroni"
+)
+cat("MMF DEGs:",
+    sum(res_MMF$adj.P.Val <= 0.05, na.rm = TRUE), "\n")
+cat("UP:",
+    sum(res_MMF$adj.P.Val <= 0.05 & res_MMF$logFC > 0, na.rm = TRUE),
+    "\n")
+cat("DOWN:",
+    sum(res_MMF$adj.P.Val <= 0.05 & res_MMF$logFC < 0, na.rm = TRUE),
+    "\n")
+# ============================================================
+# EXACT AUTHOR DEG — AZA
+# ============================================================
+met.tmp <- metadata_author[
+  metadata_author$Drug_group == "AZA" &
+  metadata_author$Diagnosis != "Healthy",
+  ,
+  drop = FALSE
+]
+dat.tmp <- data[, rownames(met.tmp), drop = FALSE]
+cat("\n================ AZA ================\n")
+cat("Samples:", nrow(met.tmp), "\n")
+print(table(met.tmp$Response))
+res_AZA <- limma.DEG(
+  data = dat.tmp,
+  metadata = met.tmp,
+  covars = ~Sex + Act + MMF_or_AZA_dosis + Prednisone_dosis,
+  padj = "bonferroni"
+)
+cat(
+  "AZA DEGs:",
+  sum(res_AZA$adj.P.Val <= 0.05, na.rm = TRUE),
+  "\n"
+)
+cat(
+  "UP:",
+  sum(
+    res_AZA$adj.P.Val <= 0.05 &
+    res_AZA$logFC > 0,
+    na.rm = TRUE
+  ),
+  "\n"
+)
+cat(
+  "DOWN:",
+  sum(
+    res_AZA$adj.P.Val <= 0.05 &
+    res_AZA$logFC < 0,
+    na.rm = TRUE
+  ),
+  "\n"
+)
+# ============================================================
+# EXACT AUTHOR DEG — HC
+# ============================================================
+met.tmp <- metadata_author[
+  metadata_author$Drug_group == "HC" &
+  metadata_author$Diagnosis != "Healthy",
+  ,
+  drop = FALSE
+]
+dat.tmp <- data[, rownames(met.tmp), drop = FALSE]
+cat("\n================ HC ================\n")
+cat("Samples:", nrow(met.tmp), "\n")
+print(table(met.tmp$Response))
+res_HC <- limma.DEG(
+  data = dat.tmp,
+  metadata = met.tmp,
+  covars = ~Sex + Act,
+  padj = "bonferroni"
+)
+cat(
+  "HC DEGs:",
+  sum(res_HC$adj.P.Val <= 0.05, na.rm = TRUE),
+  "\n"
+)
+cat(
+  "UP:",
+  sum(
+    res_HC$adj.P.Val <= 0.05 &
+    res_HC$logFC > 0,
+    na.rm = TRUE
+  ),
+  "\n"
+)
+cat(
+  "DOWN:",
+  sum(
+    res_HC$adj.P.Val <= 0.05 &
+    res_HC$logFC < 0,
+    na.rm = TRUE
+  ),
+  "\n"
+)
+# ============================================================
+# EXACT AUTHOR DEG — SOC
+# ============================================================
+met.tmp <- metadata_author[
+  (
+    metadata_author$Drug_group == "HC" |
+    metadata_author$Drug_group == "PHC"
+  ) &
+  metadata_author$Diagnosis != "Healthy",
+  ,
+  drop = FALSE
+]
+cat("\nInitial HC + PHC samples:", nrow(met.tmp), "\n")
+# ------------------------------------------------------------
+# Remove patients with cytotoxic drugs
+# ------------------------------------------------------------
+met.tmp <- met.tmp[
+  !is.na(met.tmp$MMF_or_AZA_dosis),
+  ,
+  drop = FALSE
+]
+cyt <- unique(
+  met.tmp[
+    met.tmp$MMF_or_AZA_dosis != 0,
+    "Patient_ID"
+  ]
+)
+cat("Patients receiving cytotoxic drugs:", length(cyt), "\n")
+met.tmp <- met.tmp[
+  !met.tmp$Patient_ID %in% cyt,
+  ,
+  drop = FALSE
+]
+cat("Final SOC samples:", nrow(met.tmp), "\n")
+cat("\nSOC treatment composition:\n")
+print(table(met.tmp$Drug_group))
+cat("\nSOC response:\n")
+print(table(met.tmp$Response))
+# ------------------------------------------------------------
+# Expression matrix
+# ------------------------------------------------------------
+dat.tmp <- data[, rownames(met.tmp), drop = FALSE]
+# ------------------------------------------------------------
+# Author's exact limma model
+# ------------------------------------------------------------
+res_SOC <- limma.DEG(
+  data = dat.tmp,
+  metadata = met.tmp,
+  covars = ~Sex + Act,
+  padj = "bonferroni"
+)
+cat(
+  "\nSOC DEGs:",
+  sum(res_SOC$adj.P.Val <= 0.05, na.rm = TRUE),
+  "\n"
+)
+cat(
+  "UP:",
+  sum(
+    res_SOC$adj.P.Val <= 0.05 &
+    res_SOC$logFC > 0,
+    na.rm = TRUE
+  ),
+  "\n"
+)
+cat(
+  "DOWN:",
+  sum(
+    res_SOC$adj.P.Val <= 0.05 &
+    res_SOC$logFC < 0,
+    na.rm = TRUE
+  ),
+  "\n"
+)
+# ============================================================
+# DEBUG SOC FILTERING
+# ============================================================
+soc0 <- metadata[
+  (
+    metadata$drug_group == "HC" |
+    metadata$drug_group == "PHC"
+  ) &
+  metadata$diagnosis != "Healthy",
+  ,
+  drop = FALSE
+]
+cat("Initial SOC candidates:", nrow(soc0), "\n")
+cat("\nDrug groups:\n")
+print(table(soc0$drug_group))
+cat("\nPatients:\n")
+print(length(unique(soc0$patient_id)))
+cat("\nMMF/AZA dose distribution:\n")
+print(table(soc0$MMF_or_AZA_dosis, useNA = "ifany"))
+cat("\nDose class:\n")
+print(class(soc0$MMF_or_AZA_dosis))
+cat("\nFirst 30 dose values:\n")
+print(
+  unique(
+    soc0$MMF_or_AZA_dosis
+  )[1:min(30, length(unique(soc0$MMF_or_AZA_dosis)))]
+)
+soc0$MMF_or_AZA_dose_num <- as.numeric(
+  sub(
+    "^mmf_or_aza_dosis:\\s*",
+    "",
+    soc0$MMF_or_AZA_dosis
+  )
+)
+cat("\nParsed dose:\n")
+print(table(soc0$MMF_or_AZA_dose_num, useNA = "ifany"))
+soc0$MMF_or_AZA_dose_num <- as.numeric(
+  sub(
+    "^mmf_or_aza_dosis:\\s*",
+    "",
+    soc0$MMF_or_AZA_dosis
+  )
+)
+cat("\nParsed dose:\n")
+print(table(soc0$MMF_or_AZA_dose_num, useNA = "ifany"))
+cyt <- unique(
+  soc0$patient_id[
+    !is.na(soc0$MMF_or_AZA_dose_num) &
+    soc0$MMF_or_AZA_dose_num != 0
+  ]
+)
+cat(
+  "Patients receiving cytotoxic drugs:",
+  length(cyt),
+  "\n"
+)
+print(cyt)
+met.tmp <- soc0[
+  !is.na(soc0$MMF_or_AZA_dose_num) &
+  !soc0$patient_id %in% cyt,
+  ,
+  drop = FALSE
+]
+cat("\nFinal SOC samples:", nrow(met.tmp), "\n")
+cat("\nTreatment composition:\n")
+print(table(met.tmp$drug_group))
+cat("\nResponse:\n")
+print(table(met.tmp$sri4_response))
+cat("\nUnique patients:\n")
+print(length(unique(met.tmp$patient_id)))
+dat.tmp <- data[, rownames(met.tmp), drop = FALSE]
+res_SOC <- limma.DEG(
+  data = dat.tmp,
+  metadata = met.tmp,
+  covars = ~Sex + Act,
+  padj = "bonferroni"
+)
+cat(
+  "\nSOC DEGs:",
+  sum(res_SOC$adj.P.Val <= 0.05, na.rm = TRUE),
+  "\n"
+)
+cat(
+  "UP:",
+  sum(
+    res_SOC$adj.P.Val <= 0.05 &
+    res_SOC$logFC > 0,
+    na.rm = TRUE
+  ),
+  "\n"
+)
+cat(
+  "DOWN:",
+  sum(
+    res_SOC$adj.P.Val <= 0.05 &
+    res_SOC$logFC < 0,
+    na.rm = TRUE
+  ),
+  "\n"
+)
+met.SOC.author <- met.tmp
+met.SOC.author$Response <- met.SOC.author$sri4_response
+met.SOC.author$Patient_ID <- met.SOC.author$patient_id
+dat.SOC <- data[, rownames(met.SOC.author), drop = FALSE]
+cat("Expression:", dim(dat.SOC), "\n")
+cat("Metadata:", dim(met.SOC.author), "\n")
+print(table(met.SOC.author$Response))
+res_SOC <- limma.DEG(
+  data = dat.SOC,
+  metadata = met.SOC.author,
+  covars = ~Sex + Act,
+  padj = "bonferroni"
+)
+cat(
+  "SOC DEGs:",
+  sum(res_SOC$adj.P.Val <= 0.05, na.rm = TRUE),
+  "\n"
+)
+cat(
+  "UP:",
+  sum(
+    res_SOC$adj.P.Val <= 0.05 &
+    res_SOC$logFC > 0,
+    na.rm = TRUE
+  ),
+  "\n"
+)
+cat(
+  "DOWN:",
+  sum(
+    res_SOC$adj.P.Val <= 0.05 &
+    res_SOC$logFC < 0,
+    na.rm = TRUE
+  ),
+  "\n"
+)
+save.image("GSE224705_D5A_workspace.RData")
+savehistory("GSE224705_D5A_analysis_history.Rhistory")
