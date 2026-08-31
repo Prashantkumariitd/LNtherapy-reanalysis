@@ -1,0 +1,177 @@
+============================================================
+BIOLOGICAL INTERPRETATION — LUPUS NEPHRITIS scRNA-seq
+HL vs HS
+============================================================
+
+DATASET / ANALYSIS STATUS
+-------------------------
+Single-cell RNA-seq differential expression was performed
+within cell types using pseudobulk-level analysis.
+There are 4 HL samples and 15 HS samples for almost all
+cell types.
+
+DE was followed by GO enrichment and ranked-gene GSEA.
+
+GSEA validation:
+Total significant GSEA pathways: 832
+HL-enriched pathways: 431
+HS-enriched pathways: 401
+Cell types represented in GSEA: 22
+
+============================================================
+MAIN BIOLOGICAL INTERPRETATION
+============================================================
+
+1. HL-ASSOCIATED PROGRAMS
+-------------------------
+HL-enriched GSEA shows repeated enrichment of:
+
+- chromatin remodeling
+- epigenetic regulation / heterochromatin organization
+- cytoplasmic translation
+- ribosome biogenesis / ribosomal assembly
+- cellular differentiation / developmental programs
+
+The most convincing interpretation is therefore that HL cells
+show altered transcriptional/epigenetic state together with
+changes in translational machinery.
+
+These findings should be interpreted as altered cellular state
+rather than as literal activation of developmental or muscle
+biology.
+
+Several muscle/myoblast/embryonic-development GO terms are
+repeatedly enriched in HL. Because these terms occur across
+immune cell types and are biologically unexpected in lupus
+immune cells, they should NOT be treated as primary biological
+conclusions without leading-edge gene inspection.
+
+These terms may reflect GO redundancy, pleiotropic genes,
+shared developmental annotations, or technical/annotation
+effects.
+
+============================================================
+2. HS-ASSOCIATED PROGRAMS
+============================================================
+
+HS shows a much stronger inflammatory/immune-signaling signal
+in antigen-presenting and myeloid populations.
+
+Major recurring themes include:
+
+- cytokine response
+- cytokine-mediated signaling
+- inflammatory response
+- regulation of cytokine production
+- defense response
+- response to chemokines
+- type II interferon response
+- canonical NF-kappaB signaling
+- pyroptotic inflammatory response
+
+The strongest and most coherent HS signal is therefore an
+inflammatory myeloid/DC state, particularly involving CD1C+ DC,
+CD14+/CD163+ macrophages and IFN-activated DC.
+
+============================================================
+3. LUPUS NEPHRITIS CONTEXT
+============================================================
+
+In the lupus nephritis context, the key biological question is
+whether HL and HS represent different immune-state programs.
+
+The current results suggest a possible contrast between:
+
+HL:
+  cellular-state / epigenetic / translational remodeling
+
+versus
+
+HS:
+  inflammatory cytokine / interferon / NF-kappaB activity
+  particularly in antigen-presenting and myeloid populations.
+
+This is a hypothesis-generating interpretation, not yet a
+mechanistic conclusion.
+
+============================================================
+4. IMPORTANT T-CELL SIGNAL
+============================================================
+
+T-cell populations show substantial differential expression
+and GSEA activity, particularly Naive CD8 T, Naive T/TCF7+,
+cytotoxic T-cell and gamma-delta T populations.
+
+These should be examined separately for:
+
+- cytotoxicity
+- T-cell activation
+- exhaustion/dysfunction
+- interferon response
+- TCR signaling
+- metabolic remodeling
+- differentiation/state transitions.
+
+============================================================
+5. WHAT IS CURRENTLY STRONG
+============================================================
+
+Strongest coherent observation:
+HS-associated inflammatory/cytokine/IFN programs in myeloid/DC
+populations.
+
+Second strong observation:
+HL-associated chromatin/epigenetic and translational programs.
+
+Potentially interesting but currently requiring validation:
+HL-associated muscle/developmental/myoblast GO terms.
+
+============================================================
+6. WHAT MUST NOT BE OVERCLAIMED
+============================================================
+
+Do NOT conclude that:
+- immune cells are undergoing muscle differentiation;
+- lupus nephritis directly activates myoblast pathways;
+- developmental GO terms represent a disease mechanism.
+
+These terms require leading-edge gene inspection and preferably
+independent pathway-level validation.
+
+============================================================
+7. NEXT BIOLOGICAL VALIDATION
+============================================================
+
+Priority 1:
+Collapse redundant GO terms into biological themes.
+
+Priority 2:
+Inspect leading-edge/core-enrichment genes for the major HL
+and HS pathways.
+
+Priority 3:
+Evaluate canonical lupus-relevant programs:
+IFN-I, IFN-II, inflammatory/NF-kB, antigen presentation,
+TCR signaling, cytotoxicity, B-cell/plasma-cell activation.
+
+Priority 4:
+Check whether major signals are replicated across samples
+rather than being driven by one or two individuals.
+
+Priority 5:
+Integrate DE + GSEA + cell-composition results into one
+cell-type-specific biological story.
+
+============================================================
+FINAL STATUS
+============================================================
+
+DE: COMPLETE
+GO enrichment: COMPLETE
+GSEA: COMPLETE
+GSEA validation: COMPLETE
+Biological interpretation: INITIAL PASS
+
+Remaining work:
+leading-edge validation + lupus-specific pathway validation
++ cross-cell-type biological synthesis.

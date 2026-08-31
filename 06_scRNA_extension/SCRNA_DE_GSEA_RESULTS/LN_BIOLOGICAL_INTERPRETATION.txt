@@ -1,0 +1,130 @@
+============================================================
+LUPUS NEPHRITIS scRNA-seq — BIOLOGICAL INTERPRETATION
+============================================================
+
+OVERALL MODEL
+HL and HS appear to represent distinct immune states rather than
+simply differences in immune-cell abundance.
+
+HL is relatively lymphocyte/remodeling-heavy, with strong
+cell-intrinsic transcriptional/epigenetic remodeling across
+T-cell, NK and related lymphocyte compartments.
+
+HS is relatively myeloid/DC inflammatory-heavy, with strong
+cytokine, interferon and inflammatory signaling programs.
+
+============================================================
+HL BIOLOGY
+============================================================
+
+1. LYMPHOCYTE-INTRINSIC REMODELING
+Strong HL-predominant DE is present in several lymphocyte populations,
+including Naive CD8 T, Naive T/TCF7+, Activated CD4 T, NK and Treg.
+
+This suggests that the HL-vs-HS difference is not explained solely
+by changes in cell composition; lymphocytes themselves show altered
+transcriptional states.
+
+2. CYTOTOXIC CD8 T
+Cytotoxic CD8 T showed 17 HL-associated versus 3 HS-associated
+DE genes in the earlier cell-level summary.
+
+HL-associated GSEA included strong chromatin-remodeling and
+cytoplasmic-translation programs.
+
+Important HL genes included TESK1, CTBP2, CENPB, MBD2, SAMD1,
+CYHR1, FOXK2, FBRSL1, MICAL2 and others.
+
+However, Cytotoxic CD8 T also showed an HS-enriched adaptive
+immune-response GSEA pathway (NES approximately -1.68,
+adjusted p approximately 6.8e-4).
+
+Therefore this compartment should NOT be described as purely HL.
+It appears to contain mixed/complex state remodeling.
+
+3. CHROMATIN / EPIGENETIC STATE
+Chromatin-remodeling was one of the strongest HL-enriched GSEA
+signals in Cytotoxic CD8 T.
+
+This supports a hypothesis of altered transcriptional/epigenetic
+state between HL and HS.
+
+4. TRANSLATION / PROTEIN SYNTHESIS
+Cytoplasmic translation and related protein-synthesis programs
+were repeatedly enriched toward HL in the observed GSEA results.
+
+This may indicate altered cellular activity or protein-production
+state, but should be validated using the leading-edge genes.
+
+============================================================
+HS BIOLOGY
+============================================================
+
+1. MYELOID / DC INFLAMMATORY STATE
+The strongest coherent HS signal is observed in myeloid and DC
+compartments.
+
+CD1C+ DC showed strong HS enrichment for:
+- response to cytokine
+- cytokine-mediated signaling
+- inflammatory response
+- defense response
+- cytokine production
+- chemokine response
+
+CD14+/CD163+ macrophage also showed HS inflammatory/cytokine
+programs.
+
+2. IFN-ACTIVATED DC
+IFN-activated DC showed strong HS enrichment for:
+- cytokine-mediated signaling
+- regulation of inflammatory response
+- type II interferon response
+- canonical NF-kappaB signaling
+- inflammatory response
+- pyroptotic inflammatory response
+
+This is currently one of the strongest and most biologically
+coherent HS-associated signals in the dataset.
+
+3. ADAPTIVE IMMUNE RESPONSE
+Cytotoxic CD8 T also showed an HS-enriched adaptive immune-response
+pathway.
+
+This suggests that HS may not simply represent a myeloid state;
+there may also be coordinated adaptive immune activation/state
+changes.
+
+============================================================
+LN INTERPRETATION — CURRENT WORKING MODEL
+============================================================
+
+The current data support a working model in which the two conditions
+represent different immune states in lupus nephritis.
+
+HL:
+relative lymphocyte-associated transcriptional/remodeling state,
+with strong chromatin/translation signals in Cytotoxic CD8 T and
+substantial HL-predominant DE across lymphocyte populations.
+
+HS:
+relative inflammatory myeloid/DC state characterized by cytokine,
+interferon, NF-kappaB and inflammatory programs.
+
+This interpretation is currently stronger at the level of immune
+STATE than at the level of a specific molecular mechanism.
+
+============================================================
+IMPORTANT CAUTIONS
+============================================================
+
+1. Composition and cell-intrinsic expression must remain separate.
+2. GSEA GO terms are highly redundant and should be collapsed into
+   biological modules rather than counted as independent findings.
+3. Terms such as myoblast fusion, syncytium formation, axon guidance
+   and neuron development should NOT be interpreted literally.
+4. Leading-edge/core-enrichment genes must be inspected before
+   assigning mechanisms to unusual GO terms.
+5. Small cell populations require cautious interpretation.
+6. DE/GSEA discordance is informative but requires validation.
+7. This is a working LN biological model, not yet a final mechanism.

@@ -1,0 +1,24 @@
+"celltype","HL_samples","HS_samples","DE_total","DE_HL","DE_HS","GSEA_significant"
+"Cytotoxic gamma-delta T",4,15,3,1,2,29
+"Naive T / TCF7+",4,15,69,35,34,33
+"Platelets",4,15,0,0,0,5
+"Plasma cells",4,15,5,2,3,26
+"GZMK+ gamma-delta T",4,15,11,6,5,27
+"Activated CD4 T",4,15,17,14,3,12
+"Treg",4,15,9,8,1,18
+"Cycling cells",4,15,1,1,0,1
+"Neutrophils",4,15,3,2,1,7
+"Naive CD8 T",4,15,96,53,43,25
+"Naive B",4,15,15,13,2,56
+"T cells unresolved",4,15,3,0,3,37
+"Monocytes/macrophages",4,15,4,2,2,0
+"CD14+/CD163+ macrophage",4,15,0,0,0,78
+"Cytotoxic NK/gamma-delta T",4,14,1,0,1,26
+"IFN-activated DC",4,15,2,2,0,61
+"NK",4,15,11,10,1,29
+"Memory/atypical B",4,15,29,19,10,50
+"pDC",4,15,0,0,0,18
+"SIGLEC1+ macrophage/monocyte",4,15,0,0,0,20
+"CD1C+ DC",4,15,1,1,0,124
+"B cells",4,14,0,0,0,52
+"Mast cells",4,15,5,2,3,98

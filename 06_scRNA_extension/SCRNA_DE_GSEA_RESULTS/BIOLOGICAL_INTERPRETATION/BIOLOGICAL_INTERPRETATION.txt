@@ -1,0 +1,44 @@
+$overall_context
+[1] "Single-cell RNA-seq comparison of HL vs HS in lupus nephritis. Differential expression was performed within cell types using pseudobulk-style sample-level counts with DESeq2, followed by GO enrichment and GSEA."
+
+$analysis_status
+$analysis_status$DESeq2
+[1] "Completed"
+
+$analysis_status$GO_enrichment
+[1] "Completed"
+
+$analysis_status$pseudobulk
+[1] "Completed"
+
+$analysis_status$GSEA
+[1] "Completed"
+
+$analysis_status$visualization
+[1] "Intentionally not performed at this stage"
+
+
+$key_observations
+[1] "HS shows strong inflammatory and cytokine-associated pathway enrichment."                                                                                                                                                                                                                                                          
+[2] "CD1C+ DC, CD14+/CD163+ macrophages and IFN-activated DC show particularly strong HS-associated inflammatory programs."                                                                                                                                                                                                             
+[3] "HS-associated pathways include cytokine response, cytokine-mediated signaling,\n    inflammatory response, defense response, response to chemokines and\n    type-II interferon response."                                                                                                                                         
+[4] "Adaptive immune response is significantly enriched in the HS direction in\n    the combined cellular ranking, consistent with enhanced immune activation."                                                                                                                                                                         
+[5] "HL-associated GSEA contains strong chromatin remodeling, epigenetic regulation\n    and cytoplasmic translation signals."                                                                                                                                                                                                          
+[6] "Several HL-enriched GO terms involving myoblast fusion, syncytium formation,\n    muscle differentiation and neuronal development are unlikely to represent\n    literal biological processes in circulating immune cells and should be treated\n    cautiously as gene-set/annotation structure rather than interpreted directly."
+[7] "The strongest biological contrast therefore appears to be an inflammatory/\n    cytokine/IFN-associated HS state versus a comparatively transcriptional,\n    chromatin/translation-associated HL state."                                                                                                                          
+
+$lupus_nephritis_interpretation
+[1] "The HS state is compatible with heightened immune-inflammatory activity\n    relevant to lupus nephritis pathogenesis."                                         
+[2] "The prominence of cytokine and interferon-associated programs in dendritic\n    cell and macrophage populations supports increased innate immune activation."   
+[3] "The adaptive immune response signal suggests that HS-associated changes are\n    not restricted to innate immune cells but extend into lymphocyte compartments."
+[4] "The HL-associated chromatin and translation programs may indicate a different\n    cellular activation/state landscape rather than simply weaker inflammation." 
+[5] "Cell-type-specific interpretation is essential because pathway enrichment\n    can reflect the identity and composition of the underlying gene sets."           
+
+$important_cautions
+[1] "GSEA direction is defined relative to the DESeq2 contrast HL versus HS."                                                                                
+[2] "Positive NES = genes/pathways enriched toward HL; negative NES = enriched toward HS."                                                                   
+[3] "Very broad GO categories should not be interpreted independently of their\n    leading-edge/core-enrichment genes."                                     
+[4] "Muscle, neuronal and developmental GO terms appearing in immune-cell datasets\n    require leading-edge inspection before assigning biological meaning."
+[5] "Pathway enrichment does not establish causality or clinical association."                                                                               
+[6] "The strongest conclusions should be based on recurrent biological themes\n    across multiple related cell types rather than a single pathway."         
+

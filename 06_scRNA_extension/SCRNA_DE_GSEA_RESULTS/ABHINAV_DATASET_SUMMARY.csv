@@ -1,0 +1,11 @@
+"Metric","Value"
+"Total cells",116701
+"Genes",36601
+"Biological samples",19
+"HL samples",4
+"HS samples",15
+"Annotated cell types",23
+"Cell types with GSEA",22
+"Significant GSEA pathways",832
+"HL-enriched pathways",431
+"HS-enriched pathways",401
